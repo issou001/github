@@ -1,3 +1,4 @@
+
 <html>
 <head>
 <title>Mobile Ready Screen-Set Implementation Example</title>
@@ -8,7 +9,74 @@
 <a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Default-LiteRegistration'});">Subscribe Here!</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 <a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Default-RegistrationLogin', startScreen:'gigya-registerscreen'});">Register</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 <a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Default-RegistrationLogin'});">Login</a>
-
-
+<span id="logout" hidden>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="logout();">Logout</a></span>
+<script type="text/javascript" lang="javascript">
+// calls logout then hides the logout link if the logout succeeds
+function logout() {
+gigya.accounts.logout({callback:function (response) {
+if (response.errorCode == 0) {
+document.getElementById("logout").hidden=true;
+} else {
+alert('Error:' + response.errorMessage);
+}
+}});
+}
+// if there's a user logged in then shows the logout link
+gigya.accounts.getAccountInfo({callback:function (response) {
+if (response.errorCode == 0) {
+document.getElementById("logout").hidden=false;
+}
+}});
+// traps the login event to show the logout link
+gigya.socialize.addEventHandlers({
+onLogin: function () {
+document.getElementById("logout").hidden=false;
+}
+});
+</script>
+</body>
+</html>
+Sie  an  Alle 9:16
+Concerning localization: Do you have recommendations concerning using excel or just a notepad? I had some problems with Encodings and special characters and error messages when importing the file
+Lukas Steiger  an  Alle 9:18
+FYI: I will have to be away at a customers call from 10:00 to about 10:30.
+Sie  an  Alle 9:18
+ok, thanks
+Wulfrano Moreno  an  Alle 9:29
+<html>
+<head>
+<title>Mobile Ready Screen-Set Implementation Example</title>
+<meta name="viewport" content="width=device-width">
+<SCRIPT type="text/javascript" lang="javascript" src="https://cdns.eu1.gigya.com/js/gigya.js?apikey=MY_API_KEY"></SCRIPT>
+</head>
+<body>
+<a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Default-LiteRegistration'});">Subscribe Here!</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Default-RegistrationLogin', startScreen:'gigya-register-screen'});">Register</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="#" onclick="gigya.accounts.showScreenSet({screenSet:'Default-RegistrationLogin'});">Login</a>
+<span id="logout" hidden>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#" onclick="logout();">Logout</a></span>
+<script type="text/javascript" lang="javascript">
+// calls logout then hides the logout link if the logout succeeds
+function logout() {
+gigya.accounts.logout({callback:function (response) {
+if (response.errorCode == 0) {
+document.getElementById("logout").hidden=true;
+} else {
+alert('Error:' + response.errorMessage);
+}
+}});
+}
+// if there's a user logged in then shows the logout link
+gigya.accounts.getAccountInfo({callback:function (response) {
+if (response.errorCode == 0) {
+document.getElementById("logout").hidden=false;
+}
+}});
+// traps the login event to show the logout link
+gigya.socialize.addEventHandlers({
+onLogin: function () {
+document.getElementById("logout").hidden=false;
+}
+});
+</script>
 </body>
 </html>
